@@ -1,0 +1,76 @@
+image:
+  name: hashicorp/terraform:latest
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+before_script:
+  - rm -rf .terraform
+  - terraform --version
+  - terraform init
+  - go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
+  - curl https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+stages:
+  - validate
+  - plan
+  - dev
+  - staging_plan
+  - staging
+
+validate:
+  stage: validate
+  script:
+    - terraform validate
+    - terraform fmt --check
+    - tflint --module --var-file=tfvars/dev.tfvars
+    - tfsec
+    - terraform workspace select dev
+
+plan:
+  stage: plan
+  script:
+    - terraform workspace select dev
+    - terraform plan --var-file=./tfvars/dev.tfvars -out "planfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - planfile
+
+dev:
+  stage: dev
+  script:
+    - terraform workspace select dev
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
+  when: manual
+  allow_failure: false
+
+staging_plan:
+  stage: staging_plan
+  script:
+    - terraform workspace select staging
+    - terraform plan --var-file=./tfvars/staging.tfvars -out "stagingplanfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - stagingplanfile
+  only:
+    refs:
+      - main
+
+staging:
+  stage: staging
+  script:
+    - terraform workspace select staging
+    - terraform apply -input=false "stagingplanfile"
+  dependencies:
+    - staging_plan
+  when: manual
+  only:
+    refs:
+      - main
+
