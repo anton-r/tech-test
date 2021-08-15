@@ -63,4 +63,7 @@ I decided to catch these errors and log them. I decided to log the operations al
 This meant I could discover services that either need extra information, or come back with data even with no resources.
 I used this to look for common patterns and use this to filter out which commands to run.
 
+Any feedback would be appreciated!
+Thanks! 
+
 
