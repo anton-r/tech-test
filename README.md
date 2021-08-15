@@ -27,7 +27,7 @@ terraform {
 
 
 ```
-You can add this to the remote_state_setup folder and run terraform init to mirgrate the remote states state to s3.
+You can add this to the remote_state_setup folder and run terraform init to migrate the remote states state to s3.
 For setting this up in production across multiple accounts see here: https://www.terraform.io/docs/language/settings/backends/s3.html
 
 Important Note, A remote state is a must for running from a CI server or multiple people working in an environment.
