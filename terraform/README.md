@@ -10,6 +10,31 @@ This codebase pulls in various modules to build a VPC environment consisting of:
 
 This codebase uses terraform-docs to generate the README.
 
+Requirements: Terraform 1.0.3
+
+Running a Terraform Plan:
+```bash sh run_plan.sh
+```
+
+Running a Terraform Apply:
+```bash terraform apply dev.plan  
+```
+
+### Linting
+
+```bash tflint --module --var-file=tfvars/dev.tfvars
+```
+
+### tfsec
+```bash tfsec .
+```
+
+### Terraform validate and check
+```bash terraform validate
+```
+```bash terraform fmt --check
+```
+
 ## Requirements
 
 | Name | Version |
