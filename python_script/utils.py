@@ -30,7 +30,8 @@ def tidy_response(response):
 
 
 def get_operations(service, region=None, profile=None):
-    """Return a list of function calls that can be made. This is filtered against the not used operations data"""
+    """Return a list of function calls that can be made. This is filtered against
+         the not used operations data and ignore_words list"""
     info_words = ['Describe', 'Get', 'List']
     client = boto3.Session(region_name=region, profile_name=profile).client(service)
     operations = []
@@ -40,6 +41,11 @@ def get_operations(service, region=None, profile=None):
         api_methods = dict((v, k) for k, v in client.meta.method_to_api_mapping.items())
         if operation in api_methods:
             op_to_run = api_methods.get(operation)
+        if any(ignore in op_to_run for ignore in ignore_words):
+            continue
+        for ignore in ignore_words:
+            if ignore in op_to_run:
+                continue
         try:
             if op_to_run in not_used_operations[service]:
                 continue

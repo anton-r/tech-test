@@ -18,8 +18,10 @@ not_used_operations = {
         'describe_managed_prefix_lists',
         'describe_prefix_lists',
         'describe_regions',
+        'describe_launch_template_versions',
         'describe_principal_id_format',
         'describe_spot_price_history',
+        'describe_flow_logs',
         ### The blow 2 require extra parameters.
         'describe_images',
         'describe_snapshots',
@@ -113,6 +115,7 @@ not_used_operations = {
         'describe_event_configurations',
         'get_indexing_configuration',
         'get_registration_code',
+        'list_domain_configurations'
     ],
     'iotsitewise': [
         'describe_logging_options',
@@ -141,6 +144,7 @@ not_used_operations = {
     ],
     'elasticbeanstalk': [
         'describe_account_attributes',
+        'list_available_solution_stacks'
     ],
     'clouddirectory': [
         'list_managed_schema_arns',
@@ -286,4 +290,10 @@ not_used_operations = {
     'cloudformation': [
         'describe_account_limits',
     ],
+    'nimble': [
+        'list_eulas',
+    ],
+    'cloudfront': [
+        'list_cache_polocies',
+    ]
 }

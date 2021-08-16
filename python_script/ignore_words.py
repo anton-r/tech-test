@@ -6,4 +6,8 @@ ignore_words = [
     'settings',
     'versions',
     'types',
+    'status',
+    'history',
+    'options',
+    'reservations'
 ]

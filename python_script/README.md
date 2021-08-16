@@ -12,7 +12,7 @@ The script currently:
 7. Writes json files of the response for downstream consumption (This could be loaded into redshift using s3 and json path files) or transformed to be displayed.
 
 ### To-Dos
- - Optimization/Multithreading - A feature that would need adding before running against entire aws estate in one run at the moment
+ - More optimization / getting the operations could be faster
  - Filter out default resources created by AWS
  - Better output, do something with the JSON files to show detailed information in a prettier way.  
  - Don't run the ops for every service in every region to reduce requests   
@@ -35,13 +35,21 @@ If you do run without filters for now, it will take a while to run!
 ### Example Script Output
 ```bash
 Starting run for: ['ec2', 's3', 'securityhub'] in ['eu-west-1', 'eu-west-2']
+Number of Operations to run: 334
+
 Services in use for Region: eu-west-1
 ec2
 s3
+
+
 Services in use for Region: eu-west-2
 ec2
 s3
-Run Complete, Detailed information is available in JSON at ./data/1629054923 and in separate regional folders.
+
+
+Run Complete, Detailed information is available in JSON at ./data/1629142314 and in separate regional folders.
+python __main__.py run --region eu-west-1 --service ec2 --service s3 --servic  32.00s user 15.13s system 141% cpu 33.421 total
+
 ```
 
 ### Example JSON file
