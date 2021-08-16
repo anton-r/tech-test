@@ -68,3 +68,39 @@ python __main__.py run --region eu-west-1 --service ec2 --service s3 --servic  3
   }
 }
 ```
+
+### Example Detailed Output
+More Detailed output can be retrieved using the show_details command. 
+The requires
+ - A timestamp of a previous run
+ - Region/s to be passed via cli
+ - Service/s to be passed via cli
+
+Example:
+```bash
+python __main__.py show_details --region eu-west-1 --service ec2 --timestamp 1629147991
+
+Checking for region eu-west-1
+Data found for ec2-describe_security_groups
+Data found for ec2-describe_launch_templates
+Data found for ec2-describe_nat_gateways
+Data found for ec2-describe_volumes
+Data found for ec2-describe_vpc_classic_link
+Data found for ec2-describe_addresses
+Data found for ec2-describe_subnets
+Data found for ec2-describe_vpcs
+Data found for ec2-describe_internet_gateways
+Data found for ec2-describe_network_interface_permissions
+Data found for ec2-describe_vpc_classic_link_dns_support
+Data found for ec2-describe_placement_groups
+Data found for ec2-describe_instances
+Data found for ec2-describe_network_acls
+Data found for ec2-describe_network_interfaces
+Data found for ec2-describe_reserved_instances
+Data found for ec2-describe_volumes_modifications
+Data found for ec2-describe_tags
+Data found for ec2-describe_route_tables
+Data found for ec2-describe_iam_instance_profile_associations
+Data found for ec2-describe_key_pairs
+
+```
