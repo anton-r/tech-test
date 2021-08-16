@@ -32,7 +32,7 @@ def run_aws(regions, services):
             operations = get_operations(service, region)
 
             for operation in operations:
-                operation_log = open(f'./data/{epoch_time}/operations.json', "a")
+                operation_log = open(f'./data/{epoch_time}/operations.log', "a")
                 operation_log.write(f'{service} {region} {operation}' + "\n")
                 ops_to_run.append([service, region, operation])
 
