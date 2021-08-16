@@ -16,6 +16,8 @@ from functools import partial
 import logging
 
 epoch_time = int(time.time())
+logging.basicConfig(filename = f'./error.log',level = logging.ERROR)
+logger = logging.getLogger()
 
 def run_aws(regions, services):
     """Takes the list of Services & Regions, Gets the operations and
@@ -23,7 +25,6 @@ def run_aws(regions, services):
     print(f'Starting run for: {services} in {regions}')
     global epoch_time
     create_dir(epoch_time)
-#     logging.basicConfig(filename = f'./data/{epoch_time}/error.log',level = logging.ERROR)
 
     ops_to_run = []
     for region in regions:
@@ -80,6 +81,7 @@ def run_aws(regions, services):
 
 def to_run(op_to_run):
     """Receives operations to run against AWS"""
+    global logger
     service, region, operation, epoch_time = op_to_run
 
     ops_client = boto3.Session(region_name=region, profile_name=None).client(service)
@@ -107,6 +109,6 @@ def to_run(op_to_run):
         response_dict["response"] = response
         return response_dict
     except Exception as error:
-    # Could write this somewhere that's not the error log to enable retry
+        logger.error(error)
         return
 
