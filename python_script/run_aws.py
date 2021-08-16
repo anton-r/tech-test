@@ -16,7 +16,10 @@ from functools import partial
 import logging
 
 epoch_time = int(time.time())
-logging.basicConfig(filename = f'./error.log',level = logging.ERROR)
+logging.basicConfig(filename = f'./error.log',
+                    level = logging.ERROR,
+                    filemode = 'w',
+                    )
 logger = logging.getLogger()
 
 def run_aws(regions, services):
