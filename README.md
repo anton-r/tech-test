@@ -56,9 +56,9 @@ Interesting task as I hadn't done much scripting in a while.
 Few approaches I looked at first: 
  - Export from Console and evaluate (not scripty)
  - Use Cost Explorer API (Costs)
- - Resource Tagging API (This set me of on a good path but doesn't include all services) 
+ - Resource Tagging API (This set me off on a good path but doesn't include all services) 
 
-After getting the services, regions and operations I started to hit errors due to a number of reasons.
+After getting the services, regions and operations I started to hit errors due to a number of error.
 I decided to catch these errors and log them. I decided to log the operations along with the output for a while.
 This meant I could discover services that either need extra information, or come back with data even with no resources.
 I used this to look for common patterns and use this to filter out which commands to run.
