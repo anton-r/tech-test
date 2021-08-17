@@ -50,6 +50,11 @@ s3
 Run Complete, Detailed information is available in JSON at ./data/1629142314 and in separate regional folders.
 python __main__.py run --region eu-west-1 --service ec2 --service s3 --servic  32.00s user 15.13s system 141% cpu 33.421 total
 
+
+Current time for a run against eu-west-1:
+Number of Operations to run: 3527
+python __main__.py run --region eu-west-1  231.22s user 171.37s system 162% cpu 4:08.02 total
+
 ```
 
 ### Example JSON file
