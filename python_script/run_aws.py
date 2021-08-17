@@ -13,7 +13,7 @@ from utils import create_dir, get_command, get_operations, tidy_response
 
 epoch_time = int(time.time())
 logging.basicConfig(filename = './error.log',
-                    level = logging.ERROR,
+                    level = logging.WARN,
                     filemode = 'w',
                     )
 logger = logging.getLogger()
@@ -91,16 +91,14 @@ def to_run(op_to_run):
         #Get the response and remove some of the elements we don't want
         response = tidy_response(get_command(ops_client, operation))
 
-        #Some responses come back with just an Empty Array. We log it.
+        #Some responses come back with just an Empty Array.
+        #Or have 1 element that reports 0 resources
+        #We log it and don't use this in the output.
         values_view = response.values()
         value_iterator = iter(values_view)
         first_value = next(value_iterator)
-        if first_value in ([], {}):
-            logger.info(f'{operation} - {response} is empty')
-            return
-        #This catches requests that come back with a single element that says we have 0 resources
-        if len(response) == 1 and first_value == 0:
-            logger.info(f'{operation} - {response} is empty')
+        if first_value in ([], {}) or len(response) == 1 and first_value == 0:
+            logger.warn(f'{operation} - {response} is empty')
             return
 
         response_dict = {}
