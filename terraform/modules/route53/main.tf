@@ -12,8 +12,8 @@ resource "aws_route53_zone" "public" {
 ####################
 resource "aws_route53_record" "www" {
   zone_id = aws_route53_zone.public.id
-  name    = var.public_route53_domain
-  type    = "A"
+  name    = "elb.${var.public_route53_domain}"
+  type    = "CNAME"
 
   alias {
     name                   = var.elb_dns_name
