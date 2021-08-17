@@ -10,6 +10,11 @@ This codebase pulls in various modules to build a VPC environment consisting of:
 
 This codebase uses terraform-docs to generate the README.
 
+To run terraform-docs:
+```bash
+ terraform-docs markdown . | tee README.md
+```
+
 Requirements: Terraform 1.0.3
 
 Running a Terraform Plan:
@@ -46,10 +51,6 @@ terraform fmt --check
 | Name | Version |
 |------|---------|
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | 3.54.0 |
-
-## Providers
-
-No providers.
 
 ## Modules
 

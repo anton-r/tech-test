@@ -11,6 +11,10 @@
   *
   * This codebase uses terraform-docs to generate the README.
   *
+  * To run terraform-docs:
+  * ```bash
+  *  terraform-docs markdown . | tee README.md
+  * ```
   *
   * Requirements: Terraform 1.0.3
   *
