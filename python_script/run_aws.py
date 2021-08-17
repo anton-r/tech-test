@@ -97,7 +97,7 @@ def to_run(op_to_run):
         values_view = response.values()
         value_iterator = iter(values_view)
         first_value = next(value_iterator)
-        if first_value in ([], {}) or len(response) == 1 and first_value == 0:
+        if len(response) == 1 and first_value == 0 or first_value in ([], {}):
             logger.warn(f'{operation} - {response} is empty')
             return
 
