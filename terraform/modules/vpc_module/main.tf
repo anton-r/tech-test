@@ -1,3 +1,52 @@
+/**
+  * # README.md
+  *
+  * This module creates the following:
+  *  - A VPC
+  *  - Public & Private Subnets per Availability Zone in the Region
+  *  - NAT & Internet Gateways
+  *
+  * This codebase uses terraform-docs to generate the README.
+  *
+  * To run terraform-docs:
+  * ```bash
+  *  terraform-docs markdown . | tee README.md
+  * ```
+  *
+  * Requirements: Terraform 1.0.3
+  *
+  * This module will need to be pulled in to another terraform configuration to be used.
+  * Example
+  * ```bash
+  * module "vpc" {
+  *   source = "./modules/vpc_module"
+  *   environment = var.environment
+  *   tags = var.tags
+  *   vpc_cidr = var.vpc_cidr
+  * }
+  * ```
+  *
+  * ### Linting
+  *
+  * ```bash
+  * tflint --module --var-file=tfvars/dev.tfvars
+  * ```
+  *
+  * ### tfsec
+  * ```bash
+  * tfsec .
+  * ```
+  *
+  * ### Terraform validate and check
+  * ```bash
+  * terraform validate
+  * ```
+  * ```bash
+  * terraform fmt --check
+  * ```
+  */
+
+
 ####################
 # Get the available availability zones
 ####################
