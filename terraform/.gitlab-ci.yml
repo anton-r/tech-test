@@ -13,6 +13,8 @@ before_script:
 
 stages:
   - validate
+  - lint
+  - tfsec
   - plan
   - dev
   - staging_plan
@@ -27,13 +29,34 @@ validate:
     - tfsec
     - terraform workspace select dev
 
+lint:
+  stage: lint
+  image:
+    name: ghcr.io/terraform-linters/tflint:v0.34.1
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  script:
+    - tflint --init
+    - tflint
+
+tfsec:
+  stage: tfsec
+  image:
+    name: tfsec/tfsec-ci
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  script:
+    - tfsec
+
 plan:
   stage: plan
   script:
     - terraform workspace select dev
     - terraform plan --var-file=./tfvars/dev.tfvars -out "planfile"
   dependencies:
-    - validate
+    - tfsec
   artifacts:
     paths:
       - planfile
